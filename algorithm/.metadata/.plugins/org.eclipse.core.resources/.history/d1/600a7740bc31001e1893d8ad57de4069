@@ -1,0 +1,43 @@
+package deliciousFoodMadeByDoyoung_2961;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Main {
+	
+	public static void taste(int[] sour, int[] bit, boolean[] is_used, int sour_pi, int bit_sum, int delicious int total) {
+		
+		int flavor = Math.abs(sour_pi - bit_sum);
+		
+		for(int i = 0; i < total; i++) {
+			if (!is_used[i]) {
+				is_used[i] = true;
+				taste(sour, bit, is_used, sour_pi*sour[i], bit_sum+bit[i], delicious, total);
+				is_used[i] = false;
+				taste(sour, bit, is_used, sour_pi, bit_sum, delicious, total);
+			}
+		}
+	}
+
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		StringBuffer sb = new StringBuffer();
+		int total = Integer.parseInt(br.readLine());
+		int[] sour = new int[total];
+		int[] bit = new int[total];
+		boolean[] use = new boolean[total];
+		int sour_pi;
+		int bit_sum;
+		for (int i = 0; i < total; i++) {
+			st = new StringTokenizer(br.readLine());
+			sour[i] = Integer.parseInt(st.nextToken());
+			bit[i] = Integer.parseInt(st.nextToken());
+		}
+		
+	}
+
+}

@@ -1,0 +1,16 @@
+package com.ssafy.dice;
+
+import java.util.Scanner;
+
+public class DiceTest {
+	
+	static int N, numbers[] ;
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		N = sc.nextInt();
+		int M = sc.nextInt();
+		numbers = new int[N];
+	}
+
+}

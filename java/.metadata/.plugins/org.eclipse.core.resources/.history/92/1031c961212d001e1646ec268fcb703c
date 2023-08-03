@@ -1,0 +1,25 @@
+package com.ssafy.trip.model.dao;
+
+import java.util.List;
+import com.ssafy.trip.model.dto.FestivalDto;
+import com.ssafy.trip.model.dto.TripDto;
+import com.ssafy.trip.util.TouristDestination;
+import com.ssafy.trip.util.TouristDestinationJsonParser;
+
+public class FestivalDaoImpl implements FestivalDao {
+
+  private List<FestivalDto> festivalInfo;
+
+  @Override
+  public void loadData() {
+    Festival parser = new FestivalSAXParser();
+    tripInfo = parser.getTripInfo();
+  }
+
+  @Override
+  public List<FestivalDto> search(TripDto tripDto) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+}

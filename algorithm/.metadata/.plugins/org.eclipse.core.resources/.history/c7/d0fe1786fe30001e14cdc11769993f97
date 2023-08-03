@@ -1,0 +1,34 @@
+package nandm2_15650;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Main {
+	
+	public static void makeComb(int remain, int start, int N, StringBuilder sb) throws IOException {
+		if (remain == 0) {
+			sb.append("\n");
+			return;
+		}
+		
+		for (int i = start; i < N+1; i++) {
+			sb.append(i + " ");
+			makeComb(remain-1, i+1, N, sb);
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int N = Integer.parseInt(st.nextToken());
+		int M = Integer.parseInt(st.nextToken());
+		int remain = M;
+		int num[] = new int[M];
+		makeComb(remain, 1, N, num, sb);
+		System.out.println(sb.toString());
+		
+	}
+}

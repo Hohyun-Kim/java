@@ -1,0 +1,39 @@
+package com.ssafy.trip.model.dao;
+
+import java.util.LinkedList;
+import java.util.List;
+import com.ssafy.trip.model.dto.FestivalDto;
+import com.ssafy.trip.model.dto.TripDto;
+import com.ssafy.trip.util.FestivalSAXParser;
+
+public class FestivalDaoImpl implements FestivalDao {
+
+  private List<FestivalDto> festivalInfo;
+
+  private int RegionNumber;
+
+  private String[] =
+  {"서울", "인천", "대전", "광주", "울산", "대구", "부산", "경기", "강원", "충북", "충남", "전북", "전남", "경북", "경남", "제주", "세종"};
+
+  @Override
+  public void loadData() {
+    FestivalSAXParser parser = new FestivalSAXParser();
+    festivalInfo = parser.getFestivalInfo();
+  }
+
+  @Override
+  public List<FestivalDto> search(TripDto tripDto) {
+    List<TripDto> finds = new LinkedList<TripDto>();
+
+    return null;
+  }
+
+  public int getRegionNumber(String region) {
+
+  }
+
+  public String getLocation(String region) {
+
+  }
+
+}

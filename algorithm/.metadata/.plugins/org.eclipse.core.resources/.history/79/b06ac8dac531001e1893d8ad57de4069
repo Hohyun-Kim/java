@@ -1,0 +1,92 @@
+package dnaPassword_12891;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Main {
+	
+	public static boolean check_valid(int[] ACGT_num, int[] ACGT_cnt) {
+		for (int i = 0; i < 4; i++) {
+			if (ACGT_num[i] > ACGT_cnt[i]) return false;
+		}
+		return true;
+	}
+	
+	public static void manage_cnt(String DNA, int[] ACGT_cnt, int index, boolean[] increase) {
+		for (boolean inc: increase) {
+			if (inc) {
+				switch(DNA.charAt(index)) {
+				case 'A':
+					ACGT_cnt[0]++;
+					break;
+				case 'C':
+					ACGT_cnt[1]++;
+					break;
+				case 'G':
+					ACGT_cnt[2]++;
+					break;
+				case 'T':
+					ACGT_cnt[3]++;
+					break;
+				}
+			} else {
+				switch(DNA.charAt(index)) {
+				case 'A':
+					ACGT_cnt[0]--;
+					break;
+				case 'C':
+					ACGT_cnt[1]--;
+					break;
+				case 'G':
+					ACGT_cnt[2]--;
+					break;
+				case 'T':
+					ACGT_cnt[3]--;
+					break;
+				}
+			}
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int S = Integer.parseInt(st.nextToken());
+		int T = Integer.parseInt(st.nextToken());
+		String DNA = br.readLine();
+		st = new StringTokenizer(br.readLine());
+		int[] ACGT_num = new int[4];
+		int[] ACGT_cnt = new int[4];
+		int cnt = 0;
+		char[] ACGT = {'A', 'C', 'G', 'T'};
+		boolean[] increase = {false, true};
+		for(int i = 0; i < 4; i++) {
+			ACGT_num[i] = Integer.parseInt(st.nextToken());
+		}
+		for (int i = 0; i < T; i++) {
+			switch(DNA.charAt(i)) {
+			case 'A':
+				ACGT_cnt[0]++;
+				break;
+			case 'C':
+				ACGT_cnt[1]++;
+				break;
+			case 'G':
+				ACGT_cnt[2]++;
+				break;
+			case 'T':
+				ACGT_cnt[3]++;
+				break;
+			}
+		}
+		if(check_valid(ACGT_num, ACGT_cnt)) cnt++;
+		for (int i = T; i < S; i++) {
+			DNA.charAt(index)
+		}
+		
+	}
+
+}

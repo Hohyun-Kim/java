@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<response>
+	<header>
+		<resultCode>0000</resultCode>
+		<resultMsg>OK</resultMsg>
+	</header>
+	<body>
+		<items>
+			<item>
+				<addr1>부산 해운대구</addr1>
+				<addr2>우동, 중동, 송정동, 재송동 센텀시티 지역</addr2>
+				<areacode>6</areacode>
+				<booktour>0</booktour>
+				<cat1>A02</cat1>
+				<cat2>A0202</cat2>
+				<cat3>A02020200</cat3>
+				<contentid>127004</contentid>
+				<contenttypeid>12</contenttypeid>
+				<createdtime>20031215090000</createdtime>
+				<firstimage>http://tong.visitkorea.or.kr/cms/resource/18/1801918_image2_1.jpg</firstimage>
+				<firstimage2>http://tong.visitkorea.or.kr/cms/resource/18/1801918_image3_1.jpg</firstimage2>
+				<cpyrhtDivCd>Type3</cpyrhtDivCd>
+				<mapx>129.1598690678</mapx>
+				<mapy>35.1584383046</mapy>
+				<mlevel></mlevel>
+				<modifiedtime>20230610055910</modifiedtime>
+				<sigungucode>16</sigungucode>
+				<tel></tel>
+				<title>해운대 관광특구</title>
+			</item>
+			<item>
+				<addr1>부산광역시 해운대구 중동</addr1>
+				<addr2>달맞이길62번길 11 (미포정거장)</addr2>
+				<areacode>6</areacode>
+				<booktour></booktour>
+				<cat1>A01</cat1>
+				<cat2>A0101</cat2>
+				<cat3>A01010500</cat3>
+				<contentid>2822343</contentid>
+				<contenttypeid>12</contenttypeid>
+				<createdtime>20220531134949</createdtime>
+				<firstimage>http://tong.visitkorea.or.kr/cms/resource/37/2822337_image2_1.png</firstimage>
+				<firstimage2>http://tong.visitkorea.or.kr/cms/resource/37/2822337_image3_1.png</firstimage2>
+				<cpyrhtDivCd>Type1</cpyrhtDivCd>
+				<mapx>129.1711291475</mapx>
+				<mapy>35.1603383007</mapy>
+				<mlevel>6</mlevel>
+				<modifiedtime>20230125135307</modifiedtime>
+				<sigungucode>16</sigungucode>
+				<tel></tel>
+				<title>해운대 그린레일웨이 (미포~송정 구간)</title>
+			</item>
+			<item>
+				<addr1>부산광역시 해운대구 달맞이길 190</addr1>
+				<addr2></addr2>
+				<areacode>6</areacode>
+				<booktour>0</booktour>
+				<cat1>A01</cat1>
+				<cat2>A0101</cat2>
+				<cat3>A01010500</cat3>
+				<contentid>126674</contentid>
+				<contenttypeid>12</contenttypeid>
+				<createdtime>20031215090000</createdtime>
+				<firstimage>http://tong.visitkorea.or.kr/cms/resource/37/2650837_image2_1.jpg</firstimage>
+				<firstimage2>http://tong.visitkorea.or.kr/cms/resource/37/2650837_image3_1.jpg</firstimage2>
+				<cpyrhtDivCd>Type3</cpyrhtDivCd>
+				<mapx>129.1825698917</mapx>
+				<mapy>35.1577193620</mapy>
+				<mlevel>6</mlevel>
+				<modifiedtime>20230610055927</modifiedtime>
+				<sigungucode>16</sigungucode>
+				<tel></tel>
+				<title>해운대 달맞이길</title>
+			</item>
+			<item>
+				<addr1>부산광역시 해운대구 동백로 67</addr1>
+				<addr2>(우동) 일대</addr2>
+				<areacode>6</areacode>
+				<booktour>0</booktour>
+				<cat1>A01</cat1>
+				<cat2>A0101</cat2>
+				<cat3>A01011300</cat3>
+				<contentid>987810</contentid>
+				<contenttypeid>12</contenttypeid>
+				<createdtime>20100329182646</createdtime>
+				<firstimage>http://tong.visitkorea.or.kr/cms/resource/65/1804865_image2_1.jpg</firstimage>
+				<firstimage2>http://tong.visitkorea.or.kr/cms/resource/65/1804865_image3_1.jpg</firstimage2>
+				<cpyrhtDivCd>Type3</cpyrhtDivCd>
+				<mapx>129.1521809693</mapx>
+				<mapy>35.1539914380</mapy>
+				<mlevel>6</mlevel>
+				<modifiedtime>20230131163222</modifiedtime>
+				<sigungucode>16</sigungucode>
+				<tel></tel>
+				<title>해운대 동백섬</title>
+			</item>
+			<item>
+				<addr1>부산광역시 해운대구 청사포로 116</addr1>
+				<addr2>(중동)</addr2>
+				<areacode>6</areacode>
+				<booktour>0</booktour>
+				<cat1>A02</cat1>
+				<cat2>A0202</cat2>
+				<cat3>A02020600</cat3>
+				<contentid>2672393</contentid>
+				<contenttypeid>12</contenttypeid>
+				<createdtime>20200916194024</createdtime>
+				<firstimage>http://tong.visitkorea.or.kr/cms/resource/79/2672379_image2_1.bmp</firstimage>
+				<firstimage2>http://tong.visitkorea.or.kr/cms/resource/79/2672379_image2_1.bmp</firstimage2>
+				<cpyrhtDivCd>Type3</cpyrhtDivCd>
+				<mapx>129.1913940274</mapx>
+				<mapy>35.1612607960</mapy>
+				<mlevel>6</mlevel>
+				<modifiedtime>20230616145220</modifiedtime>
+				<sigungucode>16</sigungucode>
+				<tel></tel>
+				<title>해운대 블루라인파크</title>
+			</item>
+			<item>
+				<addr1>부산광역시 해운대구 수영강변대로 85</addr1>
+				<addr2>(우동)</addr2>
+				<areacode>6</areacode>
+				<booktour>0</booktour>
+				<cat1>A02</cat1>
+				<cat2>A0202</cat2>
+				<cat3>A02020800</cat3>
+				<contentid>2705325</contentid>
+				<contenttypeid>12</contenttypeid>
+				<createdtime>20210204010831</createdtime>
+				<firstimage></firstimage>
+				<firstimage2></firstimage2>
+				<cpyrhtDivCd></cpyrhtDivCd>
+				<mapx>129.1273244146</mapx>
+				<mapy>35.1679171964</mapy>
+				<mlevel>6</mlevel>
+				<modifiedtime>20230713142326</modifiedtime>
+				<sigungucode>16</sigungucode>
+				<tel></tel>
+				<title>해운대리버크루즈</title>
+			</item>
+			<item>
+				<addr1>부산 해운대구 석대동 26</addr1>
+				<addr2></addr2>
+				<areacode>6</areacode>
+				<booktour>0</booktour>
+				<cat1>A01</cat1>
+				<cat2>A0101</cat2>
+				<cat3>A01010700</cat3>
+				<contentid>2782782</contentid>
+				<contenttypeid>12</contenttypeid>
+				<createdtime>20211129223452</createdtime>
+				<firstimage>http://tong.visitkorea.or.kr/cms/resource/38/2794338_image2_1.jpg</firstimage>
+				<firstimage2>http://tong.visitkorea.or.kr/cms/resource/38/2794338_image2_1.jpg</firstimage2>
+				<cpyrhtDivCd>Type3</cpyrhtDivCd>
+				<mapx>129.1326250124</mapx>
+				<mapy>35.2304408466</mapy>
+				<mlevel>6</mlevel>
+				<modifiedtime>20230330131213</modifiedtime>
+				<sigungucode>16</sigungucode>
+				<tel></tel>
+				<title>해운대수목원</title>
+			</item>
+			<item>
+				<addr1>부산광역시 해운대구 중동2로 16</addr1>
+				<addr2>(중동)</addr2>
+				<areacode>6</areacode>
+				<booktour>0</booktour>
+				<cat1>A02</cat1>
+				<cat2>A0202</cat2>
+				<cat3>A02020300</cat3>
+				<contentid>126108</contentid>
+				<contenttypeid>12</contenttypeid>
+				<createdtime>20031022090000</createdtime>
+				<firstimage>http://tong.visitkorea.or.kr/cms/resource/94/530594_image2_1.jpg</firstimage>
+				<firstimage2>http://tong.visitkorea.or.kr/cms/resource/94/530594_image3_1.jpg</firstimage2>
+				<cpyrhtDivCd>Type3</cpyrhtDivCd>
+				<mapx>129.1645768542</mapx>
+				<mapy>35.1634406103</mapy>
+				<mlevel>6</mlevel>
+				<modifiedtime>20220527151315</modifiedtime>
+				<sigungucode>16</sigungucode>
+				<tel></tel>
+				<title>해운대온천센터</title>
+			</item>
+			<item>
+				<addr1>부산광역시 해운대구 해운대해변로 264</addr1>
+				<addr2>(우동)</addr2>
+				<areacode>6</areacode>
+				<booktour>0</booktour>
+				<cat1>A01</cat1>
+				<cat2>A0101</cat2>
+				<cat3>A01011200</cat3>
+				<contentid>126081</contentid>
+				<contenttypeid>12</contenttypeid>
+				<createdtime>20031208090000</createdtime>
+				<firstimage>http://tong.visitkorea.or.kr/cms/resource/67/2612467_image2_1.jpg</firstimage>
+				<firstimage2>http://tong.visitkorea.or.kr/cms/resource/67/2612467_image3_1.jpg</firstimage2>
+				<cpyrhtDivCd>Type3</cpyrhtDivCd>
+				<mapx>129.1603078991</mapx>
+				<mapy>35.1591243474</mapy>
+				<mlevel>6</mlevel>
+				<modifiedtime>20230422130114</modifiedtime>
+				<sigungucode>16</sigungucode>
+				<tel></tel>
+				<title>해운대해수욕장</title>
+			</item>
+		</items>
+		<numOfRows>9</numOfRows>
+		<pageNo>1</pageNo>
+		<totalCount>9</totalCount>
+	</body>
+</response>

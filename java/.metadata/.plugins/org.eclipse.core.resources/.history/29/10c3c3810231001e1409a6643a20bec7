@@ -1,0 +1,12 @@
+package com.ssafy.cartest;
+
+public class CarMain {
+
+  public static void main(String[] args) {
+    CarManager carManager = CarManagerImpl.getCarManager();
+    
+    System.out.println("[자동차 등록하기]");
+    carManager.add(new Car(7777, "쏘나타 "));
+  }
+
+}

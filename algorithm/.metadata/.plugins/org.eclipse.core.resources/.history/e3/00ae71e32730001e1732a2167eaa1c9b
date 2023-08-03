@@ -1,0 +1,43 @@
+package nandm1_15649;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.StringTokenizer;
+
+public class Main {
+	
+	public static void makePerm(int cnt, int N, int M, int[] visit, BufferedWriter bw) throws IOException {
+		if (cnt == M) {
+			bw.flush();
+			System.out.println();
+			return;
+		}
+		cnt++;
+		for (int i = 0; i < N; i++) {
+			if (visit[i] == 1) {
+				continue;
+			}
+			visit[i] = 1;
+			bw.write((i+1)+ " ");
+			makePerm(cnt, N, M, visit, bw);
+			visit[i] = 0;
+			System.out.println(i);
+		}
+	}
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int N = Integer.parseInt(st.nextToken());
+		int M = Integer.parseInt(st.nextToken());
+		int[] visit = new int[N];
+		int cnt = 0;
+		makePerm(cnt, N, M, visit, bw);
+		
+		
+	}
+}

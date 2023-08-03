@@ -1,0 +1,43 @@
+package com.ssafy.gui;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.*;
+
+public class GuiTest extends JFrame {
+	JPanel p1 = new JPanel();
+	JPanel p2 = new JPanel();
+
+	JLabel l = new JLabel("입력");
+	JTextField tf = new JTextField();
+	JButton ok = new JButton("확인");
+	
+	JTextArea ta = new JTextArea();
+	
+	JButton open = new JButton("열기");
+	JButton exit = new JButton("종료");
+	
+	public GuiTest() {
+		super("Swing Test !!!");
+		createGUI();
+	}
+	
+	private void createGUI() {
+		p1.add(l);
+		p1.add(tf);
+		p1.add(ok);
+		
+		p2.add(open);
+		p2.add(exit);
+		
+		this.add(p1);
+		this.add(ta);
+		this.add(p2);
+	}
+	
+	public static void main(String[] args) {
+		new GuiTest();
+	}
+}

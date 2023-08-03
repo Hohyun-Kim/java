@@ -1,0 +1,19 @@
+[자동차 등록하기]
+SameNumberException 발생 : 3333은 이미 등록!!!
+----------------------------------------
+[자동차 목록보기]
+Car [carNum=1111, carName=쏘나타]
+Car [carNum=2222, carName=제네시스]
+Car [carNum=3333, carName=쏘나타]
+---------------------------------------
+[차번호(1111)검색]
+Car [carNum=1111, carName=쏘나타]      
+
+
+[차번호(5555)검색]
+NotFoundException 발생 : 5555은 미등록 차량!! 
+---------------------------------------
+[쏘나타삭제]
+Car [carNum=2222, carName=제네시스]
+Car [carNum=6666, carName=제네시스]
+Car [carNum=8888, carName=K5]

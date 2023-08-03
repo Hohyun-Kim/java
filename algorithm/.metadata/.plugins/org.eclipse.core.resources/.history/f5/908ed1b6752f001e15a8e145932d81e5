@@ -1,0 +1,13 @@
+package homework;
+
+public class Wonjae_Memory_repair {
+	
+	public static String tc = "2\rn" + "0011\r\n" + "100\r\n";
+	
+	public static void main(String[] args) {
+		
+		
+		
+	}
+
+}

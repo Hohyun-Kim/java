@@ -1,0 +1,10 @@
+package com.ssafy.gui;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class GuiTest extends JFrame {
+	JPanel p1 = new JPanel();
+	JPanel p2 = new JPanel();
+
+}

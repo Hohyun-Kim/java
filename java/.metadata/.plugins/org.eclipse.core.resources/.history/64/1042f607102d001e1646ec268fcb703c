@@ -1,0 +1,24 @@
+package com.ssafy.trip.model.dto;
+
+public class FestivalDto {
+
+  /** 축제 식별 번호 */
+  private int num;
+  /** 광역 단체명 */
+  private String touristDestination;
+  /** 기초 단체명 */
+  private String streetAddress;
+  /** 축제명 */
+  private String lotAddress;
+  /** 축제유형 */
+  private double lat;
+  /** 개최기간 */
+  private double lng;
+  /** 개최장소 */
+  private String info;
+  /** 개최방식 */
+  private String tel;
+  /** 담당자 연락처 */
+  private String img;
+
+}

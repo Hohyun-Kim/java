@@ -1,0 +1,5 @@
+package com.ssafy.cartest;
+
+public class SameNumberException extends Exception {
+
+}
