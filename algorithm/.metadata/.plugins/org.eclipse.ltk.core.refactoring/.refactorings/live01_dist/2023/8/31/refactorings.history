@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename package &apos;class_0803&apos; to &apos;com.ssafy.class0803&apos;&#x0D;&#x0A;- Original project: &apos;live01_dist&apos;&#x0D;&#x0A;- Original element: &apos;live01_dist/src/class_0803&apos;&#x0D;&#x0A;- Renamed element: &apos;live01_dist/src/com.ssafy.class0803&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;class_0803&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src&lt;class_0803" name="com.ssafy.class0803" qualified="false" references="true" stamp="1691025188142" textual="false" version="1.0"/>
-</session>
