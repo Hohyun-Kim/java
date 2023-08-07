@@ -1,0 +1,52 @@
+package planetX3_2830;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Main {
+	
+	public static int sum = 0;
+	
+	public static void calc(int[] people, int start, int cnt, boolean[] visit) {
+		
+		
+		if(cnt == 2) {
+			int[] couple = new int[2];
+			int index = 0;
+			for (int i = 0; i < visit.length; i++) {
+				if (visit[i]) {
+					couple[index++] = people[i];
+				}
+			}
+			sum += couple[0]^couple[1];
+			System.out.println(sum);
+			return;
+		}
+		for (int i = start; i < people.length; i++) {
+			System.out.print(people[i] + " ");
+			visit[i] = true;
+			calc(people, start+1, cnt+1, visit);
+			visit[i] = false;
+		}
+	}
+
+	public static void main(String[] args) throws NumberFormatException, IOException {
+
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int N = Integer.parseInt(br.readLine());
+		int[] people = new int[N];
+		for (int i = 0; i < N; i++) {
+			people[i] = Integer.parseInt(br.readLine());
+		}
+		boolean[] visit = new boolean[N];
+		if (N==1) {
+			System.out.println(sum);
+			return;
+		}
+		calc(people, 0, 0, visit);
+		System.out.println(sum);
+	}
+
+}

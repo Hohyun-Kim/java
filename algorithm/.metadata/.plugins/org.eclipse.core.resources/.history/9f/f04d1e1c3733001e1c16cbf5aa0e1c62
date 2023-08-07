@@ -1,0 +1,25 @@
+package zoac3_20436;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+	
+	public static void push_button
+
+	public static void main(String[] args) throws IOException {
+		
+		String[] keyboard = {"qwertyuiop", "asdfghjkl", "zxcvbnm"};
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		char[] s = br.readLine().toCharArray();
+		char[] input = br.readLine().toCharArray();
+		int input_size = input.length;
+		for(int i = 0; i < input_size; i++) {
+			
+		}
+		
+		
+	}
+
+}

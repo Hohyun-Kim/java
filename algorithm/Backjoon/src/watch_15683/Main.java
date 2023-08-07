@@ -46,14 +46,11 @@ public class Main {
 			for(int r = 0; r < N; r++) {
 				int visit_row = visited[r];
 				for(int c = 0; c < M; c++) {
-					if((visit_row&(1<<c))==1) {
+					if((visit_row&(1<<c)) != 0) {
 						temp--;
 					}
-					System.out.print(map[r][c] + " ");
 				}
-				System.out.println();
 			}
-			System.out.println();
 			if (min > temp) {
 				min = temp;
 			}
@@ -87,12 +84,13 @@ public class Main {
 		int nr;
 		int nc;
 		int[] now_visited = new int[N];
-		for(int i = 0; i < N; i++) {
-			now_visited[i] = visited[i];
-		}
 		
 		// choose direction
 		for(int[] direction : direction_arr) {
+			// init visit
+			for(int i = 0; i < N; i++) {
+				now_visited[i] = visited[i];
+			}
 			// check area where camera can see
 			for(int dir : direction) {
 				nr = camera[0] + camera_dir[dir][0];
@@ -104,11 +102,7 @@ public class Main {
 				}
 			}
 			watch_map(cameras, now_camera_index+1, now_visited);
-			for(int i = 0; i < N; i++) {
-				now_visited[i] = visited[i];
-			}
-		}
-		
+		}		
 	};
 
 	public static void main(String[] args) throws IOException {
@@ -119,7 +113,7 @@ public class Main {
 		M = Integer.parseInt(st.nextToken());
 		min = N * M;
 		map = new int[N][M];
-		int[] visited = new int[5];
+		int[] visited = new int[N];
 		int res = N * M;
 		int now_camera_index = 0;
 		
@@ -136,13 +130,11 @@ public class Main {
 					visited[r] = visited[r]|1<<c;
 				}
 			}
-			System.out.println(visited[r]);
 		}
 		
 		watch_map(cameras, now_camera_index, visited);
 		System.out.println(min);
 		
-
 	}
 
 }
