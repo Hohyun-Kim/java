@@ -1,4 +1,4 @@
-package muscleLoss;
+package muscleLoss_18429;
 
 import java.io.BufferedReader;
 import java.io.IOException;
