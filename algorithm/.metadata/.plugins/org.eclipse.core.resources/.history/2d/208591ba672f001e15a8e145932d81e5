@@ -1,8 +1,0 @@
-package com.ssafy.live01.dist;
-
-public class Snippet {
-	public static void main(String[] args) {
-		live01_dist
-	}
-}
-

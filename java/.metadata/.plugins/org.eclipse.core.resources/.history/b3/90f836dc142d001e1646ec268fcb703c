@@ -1,8 +1,0 @@
-package com.ssafy.trip.model.dto;
-
-public class FestivalSearchDto {
-
-  /** 관광지 주변 축제명 */
-  private String festivalAroundTouristDestination;
-
-}
