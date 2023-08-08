@@ -46,10 +46,6 @@ public class Main {
 		int index;
 		for (int i = N-1; i >= 0; i--) {
 			now = towers[i];
-			if(send_signal.size() == 0) {
-				send_signal.push(now);
-				continue;
-			}
 			while(send_signal.size()!=0 && send_signal.peek().getHeight() <= now.getHeight()) {
 				index = send_signal.pop().getIndex();
 				ans[index] = now.getIndex()+1;
