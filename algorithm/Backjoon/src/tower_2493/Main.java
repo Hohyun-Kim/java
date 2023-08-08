@@ -3,7 +3,8 @@ package tower_2493;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.StringTokenizer;
 
 public class Main {
@@ -37,7 +38,7 @@ public class Main {
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		StringBuffer sb = new StringBuffer();
 		tower[] towers = new tower[N];
-		Stack<tower> send_signal = new Stack<>();
+		Deque<tower> send_signal = new ArrayDeque<tower>();
 		int[] ans = new int[N];
 		for (int i = 0; i < N; i++) {
 			towers[i] = new tower(i, Integer.parseInt(st.nextToken()));
@@ -51,10 +52,6 @@ public class Main {
 				ans[index] = now.getIndex()+1;
 			}
 			send_signal.push(now);
-		}
-		while(send_signal.size()!=0) {
-			index = send_signal.pop().getIndex();
-			ans[index] = 0;
 		}
 		for (int i = 0; i < N; i++) {
 			sb.append(ans[i]).append(" ");
