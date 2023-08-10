@@ -1,4 +1,4 @@
-package rotateMatrix3;
+package rotateMatrix3_16935;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,10 +7,15 @@ import java.util.StringTokenizer;
 
 public class Main {
 	
-	
 	public static int N;
 	public static int M;
 	public static int[][] map;
+	
+	public static void swap_NM() {
+		int t = N;
+		N = M;
+		M = t;
+	}
 	
 	public static void rotate1() {
 		int[][]	temp = new int[N][M];
@@ -37,6 +42,7 @@ public class Main {
 				temp[c][N-1-r] = map[r][c];
 			}
 		}
+		swap_NM();
 		map = temp;
 	}
 	public static void rotate4() {
@@ -46,29 +52,23 @@ public class Main {
 				temp[M-1-c][r] = map[r][c];
 			}
 		}
+		swap_NM();
 		map = temp;
 	}
 	public static void rotate5() {
 		int[][]	temp = new int[N][M];
 		for (int t_r = 0; t_r < 2; t_r++) {
-			for (int t_c = 0; t_c < 2; t_r++) {
+			for (int t_c = 0; t_c < 2; t_c++) {
 				for (int r = t_r*N/2; r < (t_r+1)*N/2; r++) {
 					for (int c = t_c*M/2; c < (t_c+1)*M/2; c++) {
 						if (t_r == 0 && t_c == 0) {
-							temp[r][c+N/2] = map[r][c];
-							return;
-						}
-						if (t_r == 0 && t_c == 1) {
+							temp[r][c+M/2] = map[r][c];
+						} else if (t_r == 0 && t_c == 1) {
 							temp[r+N/2][c] = map[r][c];
-							return;
-						}
-						if (t_r == 1 && t_c == 0) {
+						} else if (t_r == 1 && t_c == 0) {
 							temp[r-N/2][c] = map[r][c];
-							return;
-						}
-						if (t_r == 1 && t_c == 1) {
-							temp[r][c-N/2] = map[r][c];
-							return;
+						} else if (t_r == 1 && t_c == 1) {
+							temp[r][c-M/2] = map[r][c];
 						}
 					}
 				}
@@ -77,7 +77,25 @@ public class Main {
 		map = temp;		
 	}
 	public static void rotate6() {
-		
+		int[][]	temp = new int[N][M];
+		for (int t_r = 0; t_r < 2; t_r++) {
+			for (int t_c = 0; t_c < 2; t_c++) {
+				for (int r = t_r*N/2; r < (t_r+1)*N/2; r++) {
+					for (int c = t_c*M/2; c < (t_c+1)*M/2; c++) {
+						if (t_r == 0 && t_c == 0) {
+							temp[r+N/2][c] = map[r][c];
+						} else if (t_r == 0 && t_c == 1) {
+							temp[r][c-M/2] = map[r][c];
+						} else if (t_r == 1 && t_c == 0) {
+							temp[r][c+M/2] = map[r][c];
+						} else if (t_r == 1 && t_c == 1) {
+							temp[r-N/2][c] = map[r][c];
+						}
+					}
+				}
+			}
+		}
+		map = temp;	
 	}
 	
 	public static void rotate(int op) {
