@@ -13,14 +13,14 @@ public class Main {
 		seq[j] = temp;
 	}
 	
-	public static boolean NP(int[] seq, int N) {
-		int i = N-1;
+	public static boolean NP(int[] seq) {
+		int i = 25;
 		while(i>0 && seq[i-1]>=seq[i]) i--;
 		if(i==0) return false;
-		int j = N-1;
+		int j = 25;
 		while(seq[i-1]>=seq[j]) j--;
 		swap(seq, i-1, j);
-		j = N-1;
+		j = 25;
 		while(i<j) swap(seq, i++, j--);
 		return true;
 	}
@@ -35,41 +35,38 @@ public class Main {
 			System.out.println(0);
 			return;
 		}
-		String[] words = new String[N];
-		String word;
-		int[] seq = new int[N];
-		for (int i = 0; i < N; i++) {
-			word = br.readLine();
-			words[i] = word.substring(4, word.length()-4);
-			seq[i] = i;
+		if (K > 25) {
+			System.out.println(N);
+			return;
 		}
-		K -= 5;
-		int cnt;
+		String word;
+		int[] flags = new int[N];
+		int[] comb = new int[26];
+		for(int i = K; i > 0; i--) {
+			comb[26-i] = 1;
+		}
+		for (int i = 0; i < N; i++) {
+			int now_flag = 0;
+			word = br.readLine();
+			for(int j = 0; j < word.length(); j++) {
+				now_flag |= 1<<(word.charAt(j)-'a');
+			}
+			flags[i] = now_flag;
+		}
 		int cnt_word;
 		int max = 0;
-		boolean pass;
 		do {
-			String now = "acint";
-			cnt = 0;
 			cnt_word = 0;
-			pass = true;
+			int now_flag = 0;
+			for(int i = 0; i < 26; i++) {
+				if(comb[i] == 1) now_flag |= 1<<i;
+			}
 			for(int i = 0; i < N; i++) {
-				word = words[seq[i]];
-				for(int j = 0; j < word.length(); j++) {
-					if (!now.contains(word.subSequence(j, j+1))) {
-						now += word.subSequence(j, j+1);
-						cnt++;
-						if(cnt>K) {
-							pass = false;
-							break;
-						}
-					}
-				}
-				if(!pass) break;
+				if((now_flag | flags[i]) != now_flag) continue;
 				cnt_word++;
 			}
 			if (max < cnt_word) max = cnt_word;
-		} while(NP(seq, N));
+		} while(NP(comb));
 		System.out.println(max);
 	}
 }
