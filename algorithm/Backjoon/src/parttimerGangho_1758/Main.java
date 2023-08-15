@@ -26,7 +26,7 @@ public class Main {
 			}
 			
 		});
-		int tip = 0;
+		long tip = 0;
 		for(int i = 0; i < N; i++) {
 			if (customer[i]-i > 0) tip += customer[i] - i;
 			else break;
