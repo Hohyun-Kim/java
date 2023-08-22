@@ -65,24 +65,31 @@ public class Main {
 				if(archer_num == 3) break;
 			}
 			for(int time = 0; time < N; time++) {
-				for(int i = 0; i < 3; i++) {
+				int[][] targets = {{-1, -1}, {-1, -1}, {-1, -1}};
+				for(int a_i = 0; a_i < 3; a_i++) {
 					boolean shot = false;
 					for(int d = 0; d < D; d++) {
 						for(int dc = -d; dc <= d; dc++) {
-							int r = time+1+d-(int)Math.abs(dc);
-							int c = archers[i]+dc;
-							if(in_range(r, c, N, M)) {
-								if(map_now[r][c] == 1) {
-									map_now[r][c] = 0;
-									kill++;
-									shot = true;
-									break;
-								}
+							int r = time+d-(int)Math.abs(dc);
+							int c = archers[a_i]+dc;
+							
+							if(in_range(r, c, N, M) && map_now[r][c] == 1) {
+								targets[a_i][0] = r;
+								targets[a_i][1] = c;
+								shot = true;
+								break;
 							}
 						}
 						if(shot) break;
 					}
-					if(shot) break;
+				}
+				for(int a_i = 0; a_i < 3; a_i++) {
+					int t_r = targets[a_i][0];
+					int t_c = targets[a_i][1];
+					if(in_range(t_r, t_c, N, M) && map_now[t_r][t_c] == 1) {
+						kill++;
+						map_now[t_r][t_c] = 0;
+					}
 				}
 			}
 			if(max < kill) max = kill;
