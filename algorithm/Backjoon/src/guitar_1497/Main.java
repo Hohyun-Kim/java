@@ -14,15 +14,6 @@ public class Main {
 	public static int[] total_flag;
 	public static int total_cnt;
 	
-	public static int bitCount(int flag) {
-		int cnt = 0;
-		while(flag>1) {
-			if(flag%2 == 1) cnt++;
-			flag /= 2;
-		}
-		return flag%2 == 1? cnt+1:cnt;
-	}
-	
 	public static void find_min(int start, int cnt, int flag1, int flag2) {
 		if(total_flag[0]==flag1 && total_flag[1]==flag2) {
 			if(cnt < min) min = cnt;
