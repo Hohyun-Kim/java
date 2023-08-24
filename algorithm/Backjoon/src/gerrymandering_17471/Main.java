@@ -81,17 +81,14 @@ public class Main {
 				if(min == 0) return;
 				for(int j = 0; j < now.size(); j++) { // 현재 그룹의 노드들마다 인접한 노드들 체크
 					List<Integer> adj = graph[now.get(j)]; // 현재 그룹의 j번째 노드에 인접한 노드 리스트
-					if(cnt == 1) {
-						System.out.println("0번 노드에 인접한 노드 : " + Arrays.toString(adj.toArray()));
-					}
 					for(int k = 0; k < adj.size(); k++) { // j번째 노드에 인접한 k번째 노드 체크
 						List<Integer> next = new ArrayList<>(); // 다음 그룹 선언
 						for(int l = 0; l < now.size(); l++) {
 							next.add(now.get(l));
 						}
-						if((flags[i] & 1<<k) == 0) { // k번째 노드 방문여부 확인
+						if((flags[i] & 1<<adj.get(k)) == 0) { // k번째 노드 방문여부 확인
 							boolean add_ok = true;
-							int next_flag = flags[i] | 1<<k; // k번째 노드 방문했다고 처리
+							int next_flag = flags[i] | 1<<adj.get(k); // k번째 노드 방문했다고 처리
 							for (int f = 0; f < next_flags.size(); f++) {
 								if(next_flags.get(f) == next_flag) { // 이미 전에 방문처리 한적 있으면 그룹 추가 안해도 됨
 									add_ok = false;
@@ -105,10 +102,6 @@ public class Main {
 						}
 					}
 				}
-			}
-			if(cnt == 1) {
-				System.out.println(q.size());
-				System.out.println(Arrays.toString(q.peek().toArray()));
 			}
 		}
 	}

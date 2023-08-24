@@ -6,48 +6,65 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
+	
+	static int N, d, k, c;
+	
+	static class sushiManager {
+		int[] Dish = new int[d];
+		int max = 0;
+		int numKind = 0;
+		int coupon = c;
+		boolean[] have = new boolean[d];
+		public void put(int sushi) {
+			if(have[sushi]) {
+				Dish[sushi]++;
+			} else {
+				have[sushi] = true;
+				Dish[sushi]++;
+				numKind++;
+			}
+		}
+		public void remove(int sushi) {
+			if(--Dish[sushi] == 0) {
+				have[sushi] = false;
+				numKind--;
+			}
+		}
+		public void setMax() {
+			int realNumKind = have[coupon]? numKind-1 : numKind;
+			if(max < realNumKind) max = realNumKind;
+		}
+		public boolean haveBest() {
+			return max == k;
+		}
+	}
 
 	public static void main(String[] args) throws IOException {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		int N = Integer.parseInt(st.nextToken());
-		int d = Integer.parseInt(st.nextToken());
-		int k = Integer.parseInt(st.nextToken());
-		int c = Integer.parseInt(st.nextToken())-1;
+		N = Integer.parseInt(st.nextToken());
+		d = Integer.parseInt(st.nextToken());
+		k = Integer.parseInt(st.nextToken());
+		c = Integer.parseInt(st.nextToken())-1;
 		int[] sushi = new int[N];
-		int[] final_sushi_pos = new int[d];
-		boolean[] eat = new boolean[d];
 		for(int i = 0; i < N; i++) {
 			sushi[i] = Integer.parseInt(br.readLine())-1;
 		}
-		int start = 0;
-		int end = 0;
-		int max = 0;
-		final_sushi_pos[sushi[start]] = start;
-		eat[sushi[start]] = true;
-		while(start < N) {
-			int now = end-start+1;
-			if(end < start) now += N;
-			int k_temp = eat[c]? now-1 : now;
-			if(max < k_temp) max = k_temp;
-			if(max == k) break;
-			if(now == k) {
-				eat[sushi[start++]] = false;
-			}
-			end++;
-			if(end == N) end = 0;
-			if(eat[sushi[end]]) {
-				for(int i = start; i < final_sushi_pos[sushi[end]]; i++) {
-					eat[sushi[i]] = false;
-				}
-				if(final_sushi_pos[sushi[end]] < start) break;
-				start = final_sushi_pos[sushi[end]]+1;
-			} else eat[sushi[end]] = true;
-			final_sushi_pos[sushi[end]] = end;
-			System.out.println("start : " + start + " end : " + end);
+		sushiManager mySushi = new sushiManager(); 
+		for(int i = 0; i < k; i++) {
+			mySushi.put(sushi[i]);
 		}
-		System.out.println(max+1);
+		mySushi.setMax();
+		int start = 0;
+		int end = k-1;
+		while(start < N) {
+			if(mySushi.haveBest()) break;
+			if(++end == N) end = 0;
+			mySushi.put(sushi[end]);
+			mySushi.remove(sushi[start++]);
+			mySushi.setMax();
+		}
+		System.out.println(mySushi.max+1);
 	}
-
 }
