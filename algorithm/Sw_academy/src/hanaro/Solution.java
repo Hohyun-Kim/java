@@ -31,8 +31,8 @@ public class Solution {
 			this.island2 = island2;
 			this.cost = E * this.length();
 		}
-		public long length() {
-			return (islands[island1].x - islands[island2].x)^2 + (islands[island1].y - islands[island2].y)^2;
+		public double length() {
+			return Math.pow((double)(islands[island1].x - islands[island2].x), 2) + Math.pow((double)(islands[island1].y - islands[island2].y), 2);
 		}
 		@Override
 		public int compareTo(tunnel o) {
@@ -50,33 +50,45 @@ public class Solution {
 		for (int t = 1; t <= T; t++) {
 			N = Integer.parseInt(br.readLine());
 			islands = new island[N];
+			st = new StringTokenizer(br.readLine());
+			int[] x = new int[N];
+			int[] y = new int[N];
 			for (int i = 0; i < N; i++) {
-				st = new StringTokenizer(br.readLine());
-				int x = Integer.parseInt(st.nextToken());
-				int y = Integer.parseInt(st.nextToken());
-				islands[i] = new island(x, y);
+				x[i] = Integer.parseInt(st.nextToken());
+			}
+			st = new StringTokenizer(br.readLine());
+			for (int i = 0; i < N; i++) {
+				y[i] = Integer.parseInt(st.nextToken());
+				islands[i] = new island(x[i], y[i]);
 			}
 			E = Double.parseDouble(br.readLine());
-			tunnel[] tunnels = new tunnel[N*(N-1)/2];
-			int idx = 0;
-			for (int i = 0; i < N; i++) {
-				for (int j = i+1; j < N; j++) {
-					tunnels[idx++] = new tunnel(i, j);
-				}
-			}
 			boolean[] visit = new boolean[N];
 			double[] minTunnel = new double[N];
 			Arrays.fill(minTunnel, Double.MAX_VALUE);
 			PriorityQueue<tunnel> pq = new PriorityQueue<>();
-			minTunnel[0] = tunnels[0].cost;
-			pq.offer(new tunnel)
+			pq.offer(new tunnel(0, 0));
+			minTunnel[0] = 0;
+			double cost_sum = 0;
 			int cnt = 0;
-			int start = 0;
-			visit[start] = true;
-			while() {
-				
+			int minIsland = 0;
+			while (true) {
+				tunnel cur = pq.poll();
+				if(visit[cur.island1] && visit[cur.island2]) continue;
+				minIsland = visit[cur.island1]? cur.island2:cur.island1;
+				visit[minIsland] = true;
+				cost_sum += cur.cost;
+				if(++cnt==N) break;
+				for (int i = 0; i < N; i++) {
+					tunnel now = new tunnel(minIsland, i);
+					if(!visit[i] && minTunnel[i] > now.cost) {
+						minTunnel[i] = now.cost;
+						pq.offer(now);
+					}
+				}
 			}
+			sb.append("#").append(t).append(" ").append(Math.round(cost_sum)).append("\n");
 		}
+		System.out.println(sb);
 	}
 
 }
