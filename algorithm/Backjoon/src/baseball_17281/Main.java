@@ -5,11 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-import javax.print.attribute.standard.Finishings;
-
 public class Main {
-	
-	static int N;
 	
 	public static void swap(int[] seq, int i, int j) {
 		int temp = seq[i];
@@ -18,13 +14,13 @@ public class Main {
 	}
 	
 	public static boolean NP(int[] seq) {
-		int i = N-1;
+		int i = 7;
 		while(i>0&&seq[i-1]>=seq[i]) i--;
 		if(i==0) return false;
-		int j = N-1;
+		int j = 7;
 		while(seq[i-1]>=seq[j]) j--;
 		swap(seq, i-1, j);
-		j = N-1;
+		j = 7;
 		while(i<j) swap(seq, i++, j--);
 		return true;
 	}
@@ -34,6 +30,7 @@ public class Main {
 		int outCount = 0;
 		int seat = 0;
 		int playerIdx = 0;
+		int score = 0;
 		
 		public void finishInning(int pNo) {
 			this.inning++;
@@ -42,7 +39,21 @@ public class Main {
 			this.playerIdx = pNo;
 		}
 		public void reflectResult(int pid) {
-			
+			if(pid == 0) {
+				this.outCount++;
+				return;
+			}
+			if(pid == 4) {
+				score += Integer.bitCount(seat) + 1;
+				seat = 0;
+				return;
+			}
+			seat <<= pid;
+			seat |= 1<<(pid-1);
+			if(seat > 7) {
+				score += Integer.bitCount(seat&56);
+				seat &= 7;
+			}
 		}
 	}
 
@@ -50,7 +61,7 @@ public class Main {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st;
-		N = Integer.parseInt(br.readLine());
+		int N = Integer.parseInt(br.readLine());
 		int[][] game_do = new int[N][9];
 		for(int i = 0 ; i < N; i++) {
 			st = new StringTokenizer(br.readLine());
@@ -59,13 +70,15 @@ public class Main {
 			}
 		}
 		int[] seq = {1, 2, 3, 4, 5, 6, 7, 8};
+		int max = 0;
 		do {
 			game nowGame = new game();
 			int[] player = new int[9];
 			player[3] = 0;
+			int idx = 0;
 			for(int i = 0; i < 9; i++) {
-				
-				player[i] = seq[i];
+				if(i == 3) continue;
+				player[i] = seq[idx++];
 			}
 			for(int inning = 0; inning < N; inning++) {
 				int pNo = nowGame.playerIdx;
@@ -76,11 +89,9 @@ public class Main {
 				}
 				nowGame.finishInning(pNo);
 			}
-			
-		}while(NP(seq));
-		
-		
-
+			if(max < nowGame.score) max = nowGame.score;
+		}while(NP(seq));		
+		System.out.println(max);
 	}
 
 }

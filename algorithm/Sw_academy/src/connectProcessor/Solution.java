@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.PriorityQueue;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Solution {
@@ -16,6 +16,8 @@ public class Solution {
 	static int max_core;
 	static int min_len;
 	static ArrayList<core> coreList;
+	static int coreList_size;
+	static int test_case;
 	
 	
 	static boolean is_edge(int r, int c) {
@@ -40,49 +42,51 @@ public class Solution {
 		int nr = row + dr[d];
 		int nc = col + dc[d];
 		while(in_range(nr, nc) && map[nr][nc] == 0) {
-			map[nr][nc] = 1;
+			map[nr][nc] = 2;
+			nr += dr[d];
+			nc += dc[d];
 			now_len++;
 		}
-		return new int[]{nr, nc, now_len};
+		return new int[]{nr-dr[d], nc-dc[d], now_len};
 	}
 	
 	public static void removeLine(int row, int col, int d) {
-		int nr = row + dr[d];
-		int nc = col + dc[d];
-		while(in_range(nr, nc) && map[nr][nc] == 1) {
+		int nr = row;
+		int nc = col;
+		while(in_range(nr, nc) && map[nr][nc] == 2) {
 			map[nr][nc] = 0;
+			nr -= dr[d];
+			nc -= dc[d];
 		}
 	}
 	
-	public static void connectLine(int cnt, int len, int flag, int num_core) {
+	public static void connectLine(int cnt, int len, int num_core) {
 		
-		if(cnt == coreList.size()) {
-			if (len < min_len) min_len = len;
-			if (num_core > max_core) max_core = num_core;
+		if(cnt == coreList_size) {
+			if (num_core > max_core) {
+				max_core = num_core;
+				min_len = len;
+			} else if (num_core == max_core) {
+				if (min_len > len) min_len = len;
+			}
 			return;
 		}
 		
-		if(num_core + coreList.size() - cnt < max_core) return;
+		if(num_core + coreList_size - cnt < max_core) return;
 		
-		for(int i = 0; i < coreList.size(); i++) {
-			if((flag & 1<<i) == 0) {
-				int row = coreList.get(i).row;
-				int col = coreList.get(i).col;
-				boolean able = false;
-				for(int d = 0; d < 4; d++) {
-					int[] line = putLine(row, col, d);
-					int nr = line[0];
-					int nc = line[1];
-					int now_len = line[2];
-					if(is_edge(nr, nc)) {
-						able = true;
-						connectLine(cnt+1, len+now_len, flag|1<<i, num_core+1);
-					}
-					removeLine(row, col, d);
-				}
-				if(!able) connectLine(cnt+1, len, flag, num_core);
+		int row = coreList.get(cnt).row;
+		int col = coreList.get(cnt).col;
+		for(int d = 0; d < 4; d++) {
+			int[] line = putLine(row, col, d);
+			int nr = line[0];
+			int nc = line[1];
+			int now_len = line[2];
+			if(is_edge(nr, nc)) {
+				connectLine(cnt+1, len+now_len, num_core+1);
 			}
+			removeLine(nr, nc, d);
 		}
+		connectLine(cnt+1, len, num_core);
 	}
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
@@ -92,6 +96,7 @@ public class Solution {
 		StringTokenizer st;
 		StringBuffer sb = new StringBuffer();
 		for(int t = 1; t <= T; t++) {
+			test_case = t;
 			N = Integer.parseInt(br.readLine());
 			map = new int[N][N];
 			coreList = new ArrayList<>();
@@ -101,17 +106,13 @@ public class Solution {
 					map[r][c] = Integer.parseInt(st.nextToken());
 					if(map[r][c] == 1) {
 						if(!is_edge(r, c)) coreList.add(new core(r, c));
-						map[r][c] = 2;
 					}
 				}
 			}
-			int[] seq = new int[coreList.size()];
-			for(int i = 0; i < coreList.size(); i++) {
-				seq[i] = i;
-			}
+			coreList_size = coreList.size();
 			max_core = 0;
-			min_len = 0;
-			connectLine(0, 0, 0, 0);
+			min_len = Integer.MAX_VALUE;
+			connectLine(0, 0, 0);
 			sb.append("#").append(t).append(" ").append(min_len).append("\n");
 		}
 		System.out.println(sb);
