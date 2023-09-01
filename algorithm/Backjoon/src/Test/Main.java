@@ -3,23 +3,35 @@ package Test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
 
 public class Main {
-
-	public static void main(String[] args) throws NumberFormatException, IOException{
-		
+	
+	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st;
-		int X = Integer.parseInt(br.readLine());
-		int N = Integer.parseInt(br.readLine());
-		int sum = 0;
-		for(int i = 0; i < N; i++) {
-			st = new StringTokenizer(br.readLine());
-			int a = Integer.parseInt(st.nextToken());
-			sum += a * Integer.parseInt(st.nextToken());
+		StringBuffer sb = new StringBuffer();
+		while(true) {
+			String word = br.readLine();
+			if(word.equals("0")) break;
+			int index = 0;
+			int len = word.length();
+			if (len == 1) {
+				sb.append("yes").append("\n");
+				continue;
+			}
+			int check_length = len/2;
+			boolean is_palendrom = true;
+			while(index < check_length) {
+				if (word.charAt(index) != word.charAt(len-1-index)) {
+					is_palendrom = false;
+					break;
+				}
+				index++;
+			}
+			if (is_palendrom) sb.append("yes");
+			else sb.append("no");
+			sb.append("\n");
 		}
-		System.out.println(X==sum?"Yes":"No");
+		System.out.println(sb);
 	}
 
 }
