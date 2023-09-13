@@ -36,6 +36,11 @@
       let btn = document.querySelector("#listBtn");
       btn.addEventListener("click", function () {
         // TODO : 4-01csv.jsp 비동기 호출
+        fetch("4-01csv.jsp")
+          .then((response) => response.text())
+          .then((text) => {
+            makeList(text);
+          });
       });
 
       function makeList(data) {

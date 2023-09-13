@@ -36,6 +36,11 @@
       let btn = document.querySelector("#listBtn");
       btn.addEventListener("click", function () {
         // TODO : 4-02.xml 비동기 호출
+        fetch("4-02.xml")
+          .then((response) => response.text())
+          .then((text) => {
+            makeList(text);
+          });
       });
 
       function makeList(data) {

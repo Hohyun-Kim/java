@@ -36,6 +36,11 @@
       let btn = document.querySelector("#listBtn");
       btn.addEventListener("click", function () {
         // TODO : 4-03.json 비동기 호출
+        fetch("4-03.json")
+          .then((response) => response.json())
+          .then((text) => {
+            makeList(text);
+          });
       });
 
       function makeList(data) {
