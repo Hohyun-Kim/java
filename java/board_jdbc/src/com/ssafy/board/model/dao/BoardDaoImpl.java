@@ -25,7 +25,21 @@ public class BoardDaoImpl implements BoardDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 //		TODO : boardDto의 내용을 board table에 insert 하세요!!!
-		
+		try {
+			conn = DBUtil.getInstance().getConnection();
+			StringBuilder sql = new StringBuilder("insert into board (user_id, subject, content) \n");
+			sql.append("values (?, ?, ?)");
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setString(1, boardDto.getUserId());
+			pstmt.setString(2, boardDto.getSubject());
+			pstmt.setString(3, boardDto.getContent());
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.getInstance().close(pstmt, conn);
+		}
+		BoardDaoImpl.getBoardDao().registerArticle(boardDto);
 //		END
 	}
 

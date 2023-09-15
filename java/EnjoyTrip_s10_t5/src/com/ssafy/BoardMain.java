@@ -1,4 +1,4 @@
-package com.ssafy.board;
+package com.ssafy;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import com.ssafy.board.model.service.BoardServiceImpl;
 
 public class BoardMain {
 
-	BufferedReader in;
+	private BufferedReader in;
 
 	public BoardMain() {
 		in = new BufferedReader(new InputStreamReader(System.in));
@@ -52,6 +52,7 @@ public class BoardMain {
 					deleteArticle();
 					break;
 				default:
+					System.out.println("프로그램을 종료합니다!!!");
 					System.exit(0);
 				}
 			} catch (IOException e) {
@@ -68,15 +69,11 @@ public class BoardMain {
 		System.out.print("내용 : ");
 		boardDto.setContent(in.readLine());
 		boardDto.setUserId("ssafy");
-//		TODO : Service의 registerArticle을 호출하세요!!!
 		BoardServiceImpl.getBoardService().registerArticle(boardDto);
-//		END
 	}
 
 	private void searchListAll() {
-//		TODO : Service의 searchListAll을 호출하세요!!!
-		List<BoardDto> list = null;
-//		END
+		List<BoardDto> list = BoardServiceImpl.getBoardService().searchListAll();
 		System.out.println("********** 글목록(전체) **********");
 		for(BoardDto article : list) {
 			System.out.println(article);
@@ -86,9 +83,7 @@ public class BoardMain {
 	private void searchListBySubject() throws IOException {
 		System.out.print("검색 할 제목 : ");
 		String subject = in.readLine();
-//		TODO : Service의 searchListBySubject을 호출하세요!!!
-		List<BoardDto> list = null;
-//		END
+		List<BoardDto> list = BoardServiceImpl.getBoardService().searchListBySubject(subject);
 		System.out.println("********** 글목록(제목검색) **********");
 		for(BoardDto article : list) {
 			System.out.println(article);
@@ -98,9 +93,7 @@ public class BoardMain {
 	private void viewArticle() throws IOException {
 		System.out.print("글번호 : ");
 		int no = Integer.parseInt(in.readLine());
-//		TODO : Service의 viewArticle을 호출하세요!!!
-		BoardDto boardDto = null;
-//		END		
+		BoardDto boardDto = BoardServiceImpl.getBoardService().viewArticle(no);
 		System.out.println("********** " + no + "번 글정보 **********");
 		System.out.println(boardDto);
 	}
@@ -113,21 +106,16 @@ public class BoardMain {
 		boardDto.setSubject(in.readLine());
 		System.out.print("수정 내용 : ");
 		boardDto.setContent(in.readLine());
-//		TODO : Service의 modifyArticle을 호출하세요!!!
-		
-//		END
+		BoardServiceImpl.getBoardService().modifyArticle(boardDto);
 	}
 
 	private void deleteArticle() throws IOException {
 		System.out.print("삭제 할 글번호 : ");
 		int no = Integer.parseInt(in.readLine());
-//		TODO : Service의 deleteArticle을 호출하세요!!!
-		
-//		END
+		BoardServiceImpl.getBoardService().deleteArticle(no);
 	}
 
 	public static void main(String[] args) {
 		new BoardMain();
 	}
-
 }

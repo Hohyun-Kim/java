@@ -7,11 +7,11 @@ import java.util.List;
 
 import com.ssafy.board.model.BoardDto;
 import com.ssafy.board.model.dao.BoardDaoImpl;
+import com.ssafy.member.model.dao.MemberDaoImpl;
 import com.ssafy.util.DBUtil;
 
 public class BoardServiceImpl implements BoardService {
 	
-//	TODO : BoardServiceImpl의 객체를 Singleton으로 새성하고 instance를 return하는 getBoardService()를 만드세요.
 	private static BoardService boardService = new BoardServiceImpl();
 	
 	private BoardServiceImpl() {
@@ -21,7 +21,6 @@ public class BoardServiceImpl implements BoardService {
 	public static BoardService getBoardService() {
 		return boardService;
 	}
-//	END
 
 	@Override
 	public void registerArticle(BoardDto boardDto) {
