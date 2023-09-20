@@ -27,11 +27,24 @@ public class MemberController extends HttpServlet {
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-		
 		String path = "";
 		if("mvjoin".equals(action)) {
 			path = "/user/join.jsp";
 			redirect(request, response, path);
+		} else if("idcheck".equals(action)) {
+			String ckid = request.getParameter("checkid");
+			System.out.println(ckid);
+			int cnt;
+			try {
+				cnt = memberService.idCheck(ckid);
+				System.out.println("cnt == " + cnt);
+			} catch (Exception e) {
+				e.printStackTrace();
+				cnt = 1;
+			}
+			response.setContentType("application/json;charset=utf-8");
+			String json = "{\"id\": \"" + ckid + "\",\"cnt\": \"" + cnt + "\"}";
+			response.getWriter().print(json);
 		} else if("join".equals(action)) {
 			path = join(request, response);
 			redirect(request, response, path);
@@ -40,7 +53,7 @@ public class MemberController extends HttpServlet {
 			redirect(request, response, path);
 		} else if("login".equals(action)) {
 			path = login(request, response);
-			forward(request, response, path);
+			redirect(request, response, path);
 		} else if("logout".equals(action)) {
 			path = logout(request, response);
 			redirect(request, response, path);
@@ -66,9 +79,29 @@ public class MemberController extends HttpServlet {
 	
 	private String join(HttpServletRequest request, HttpServletResponse response) {
 		// TODO : 이름, 아이디, 비밀번호, 이메일등 회원정보를 받아 MemberDto로 setting
-		// TODO : 위의 데이터를 이용하여 service의 joinMember() 호
+		MemberDto memberDto = new MemberDto();
+		memberDto.setUserName(request.getParameter("username"));
+		memberDto.setUserId(request.getParameter("userid"));
+		memberDto.setUserPwd(request.getParameter("userpwd"));
+		memberDto.setEmailId(request.getParameter("emailid"));
+		memberDto.setEmailDomain(request.getParameter("emaildomain"));
+		// TODO : 위의 데이터를 이용하여 service의 joinMember() 호출
+		int cnt = 0;
+		try {
+			cnt = memberService.joinMember(memberDto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			cnt = 0;
+			return "";
+		}
 		// TODO : 정상 등록 후 로그인 페이지로 이동.
-		return null;
+		if(cnt == 1) {
+			return "/user/login.jsp";
+		} else {
+			request.setAttribute("msg", "회원가입에 실패했습니다.");
+			return "";
+		}
 	}
 	
 	private String login(HttpServletRequest request, HttpServletResponse response) {

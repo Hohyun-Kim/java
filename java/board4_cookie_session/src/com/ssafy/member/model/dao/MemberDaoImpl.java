@@ -23,14 +23,48 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public int idCheck(String userId) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		int cnt = 1;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = dbUtil.getConnection();
+			StringBuilder sql = new StringBuilder("select count(user_id) \n");
+			sql.append("from members \n");
+			sql.append("where user_id = ?");
+			pstmt = conn.prepareStatement(sql.toString());
+			pstmt.setString(1, userId);
+			rs = pstmt.executeQuery();
+			rs.next();
+			cnt = rs.getInt(1);
+		} finally {
+			dbUtil.close(rs, pstmt, conn);
+		}
+		
+		return cnt;
 	}
 
 	@Override
 	public int joinMember(MemberDto memberDto) throws SQLException {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int cnt = 0;
+		try {
+			conn = dbUtil.getConnection();
+			StringBuilder joinMember = new StringBuilder();
+			joinMember.append("insert into members (user_name, user_id, user_password, email_id, email_domain) \n");
+			joinMember.append("values (?, ?, ?, ?, ?)");
+			pstmt = conn.prepareStatement(joinMember.toString());
+			pstmt.setString(1, memberDto.getUserName());
+			pstmt.setString(2, memberDto.getUserId());
+			pstmt.setString(3, memberDto.getUserPwd());
+			pstmt.setString(4, memberDto.getEmailId());
+			pstmt.setString(5, memberDto.getEmailDomain());
+			cnt = pstmt.executeUpdate();
+		} finally {
+			dbUtil.close(pstmt, conn);
+		}
+		return cnt;
 	}
 
 	@Override

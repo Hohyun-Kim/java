@@ -121,7 +121,12 @@ if(memberDto == null) {
 %>
     <div class="container">
 		<!-- 로그인 사용자 정보(로그아웃) 출력 -->
-		<%@ include file="/common/confirm.jsp" %>
+		<div class="row justify-content-center">
+		  <div class="col-lg-8 col-md-10 col-sm-12 m-3 text-end">
+			<strong><%= memberDto.getUserName() %></strong> (<%= memberDto.getUserId() %>)님 안녕하세요.
+			<a href="<%= root %>/user?action=logout">로그아웃</a><br />
+		  </div>
+		</div>
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10 col-sm-12">
           <h2 class="my-3 py-3 shadow-sm bg-light text-center">
