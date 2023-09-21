@@ -1,6 +1,7 @@
 package com.ssafy.class0817;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class AdjLIstTest {
@@ -18,7 +19,7 @@ public class AdjLIstTest {
 			return "Node [vertex=" + vertex + ", next=" + next + "]";
 		}
 	}
-
+	
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
