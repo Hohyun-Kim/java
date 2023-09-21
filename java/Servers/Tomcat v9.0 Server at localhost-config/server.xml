@@ -109,7 +109,7 @@
 
 				
 				
-			<Context docBase="board4_cookie_session" path="/board4_cookie_session" reloadable="true" source="org.eclipse.jst.jee.server:board4_cookie_session"/><Context docBase="board2_jsp2" path="/board" reloadable="true" source="org.eclipse.jst.jee.server:board2_jsp2"/></Host>
+			<Context docBase="board4_cookie_session" path="/board4_cookie_session" reloadable="true" source="org.eclipse.jst.jee.server:board4_cookie_session"/><Context docBase="board2_jsp2" path="/board" reloadable="true" source="org.eclipse.jst.jee.server:board2_jsp2"/><Context docBase="board5_el_jstl" path="/board5_el_jstl" reloadable="true" source="org.eclipse.jst.jee.server:board5_el_jstl"/></Host>
 		</Engine>
 	</Service>
 </Server>
