@@ -20,7 +20,7 @@ public class ParameterTest extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 //		1. data get
 		String userName = request.getParameter("username");
-		String userPwd = request.getParameter("userpwd");;
+		String userPwd = request.getParameter("userpwd");
 		String[] fruits = request.getParameterValues("fruit");
 //		2. logic >> 나중에 DB랑 ~ 하세요.
 		
