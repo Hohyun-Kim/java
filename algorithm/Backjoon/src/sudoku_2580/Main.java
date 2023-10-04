@@ -1,4 +1,4 @@
-package sudoku_2239;
+package sudoku_2580;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -61,13 +61,13 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuffer sb = new StringBuffer();
-		String line;
+		String[] line;
 		int cnt = 0;
 		for (int r = 0; r < 9; r++) {
-			line = br.readLine();
+			line = br.readLine().split(" ");
 			int row_group = r / 3;
 			for (int c = 0; c < 9; c++) {
-				map[r][c] = line.charAt(c) - '0';
+				map[r][c] = line[c].charAt(0) - '0';
 				if (map[r][c] != 0) {
 					flag[r][c] = complete;
 					flag_row[r] |= 1 << map[r][c] - 1;
@@ -327,11 +327,10 @@ public class Main {
 		
 		for (int r = 0; r < 9; r++) {
 			for (int c = 0; c < 9; c++) {
-				sb.append(map[r][c]);
+				sb.append(map[r][c]).append(" ");
 			}
 			sb.append("\n");
 		}
 		System.out.println(sb.toString());
 	}
 }
-
