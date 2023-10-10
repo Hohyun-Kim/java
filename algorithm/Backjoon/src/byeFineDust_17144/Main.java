@@ -28,7 +28,7 @@ public class Main {
 				for(int d = 0; d < 4; d++) {
 					int nr = r + dr[d];
 					int nc = c + dc[d];
-					if(in_range(nr, nc) && map[r][c] != -1) {
+					if(in_range(nr, nc) && map[nr][nc] != -1) {
 						diff[nr][nc] += map[r][c]/5;
 						diff_cnt++;
 					}
@@ -51,27 +51,25 @@ public class Main {
 		int d = 0;
 		int nr = r + dr[d];
 		int nc = c;
-		while(nr != airtop && nc != 0) {
-			if(in_range(nr, nc)) {
+		while(nr != airtop || nc != 0) {
+			if(in_range(nr, nc) && nr < airbottom) {
 				map[r][c] = map[nr][nc];
 				r = nr;
 				c = nc;
 			} else {
 				d++;
+				if(d > 3) d = 0;
 			}
 			nr = r + dr[d];
 			nc = c + dc[d];
 		}
-		System.out.println(r);
-		System.out.println(c);
 		map[r][c] = 0;
 		r = airbottom+1;
 		c = 0;
 		d = 2;
 		nr = r + dr[d];
 		nc = c;
-		System.out.println("airbottom : " + airbottom);
-		while(nr != airbottom && nc != 0) {
+		while(nr != airbottom || nc != 0) {
 			if(in_range(nr, nc) && nr > airtop) {
 				map[r][c] = map[nr][nc];
 				r = nr;
@@ -84,17 +82,12 @@ public class Main {
 			nc = c + dc[d];
 		}
 		map[r][c] = 0;
-		System.out.println("r : " + r);
 	}
 	
 	public static void Tlater() {
 		for(int t = 0; t < T; t++) {
 			diffusion();
 			actCleaner();
-			System.out.println();
-			for(int r = 0; r < R; r++) {
-				System.out.println(Arrays.toString(map[r]));
-			}
 		}
 	}
 	
@@ -123,14 +116,14 @@ public class Main {
 		
 		Tlater();
 		
-		int finedust = 0;
+		int finedust = 2;
 		for(int r = 0; r < R; r++) {
 			for(int c = 0; c < C; c++) {
 				finedust += map[r][c]; 
 			}
 		}
 		
-		System.out.println(finedust+2);
+		System.out.println(finedust);
 	}
 	
 }
