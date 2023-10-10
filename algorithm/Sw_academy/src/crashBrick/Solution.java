@@ -1,4 +1,4 @@
-package crachBrick;
+package crashBrick;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -80,6 +80,10 @@ public class Solution {
 		Queue<Ball> q = new ArrayDeque<>();
 		for(int row = 0; row < H; row++) {
 			if(map_clone[row][col] != 0) {
+				if(map_clone[row][col] == 1) {
+					map_clone[row][col] = 0;
+					return true;
+				}
 				q.offer(new Ball(row, col, map_clone[row][col]));
 				map_clone[row][col] = 0;
 				break;
