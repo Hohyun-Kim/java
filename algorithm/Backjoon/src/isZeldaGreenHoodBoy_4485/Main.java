@@ -60,11 +60,10 @@ public class Main {
 			while(!pq.isEmpty()) {
 				thief now = pq.poll();
 				if(now.r == N-1 && now.c == N-1) break;
-				visited[now.r][now.c] = true;
 				for(int d = 0; d < 4; d++) {
 					int nr = now.r + dr[d];
 					int nc = now.c + dc[d];
-					if(in_range(nr, nc) && !visited[nr][nc] && dist[nr][nc] > now.steal + map[nr][nc]) {
+					if(in_range(nr, nc) && dist[nr][nc] > now.steal + map[nr][nc]) {
 						dist[nr][nc] = now.steal + map[nr][nc];
 						pq.offer(new thief(nr, nc, dist[nr][nc]));
 					}
