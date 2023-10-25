@@ -2,7 +2,6 @@
     pageEncoding="UTF-8" import="com.ssafy.member.model.MemberDto"%>
 <%
 MemberDto userInfo = (MemberDto) session.getAttribute("userinfo");
-
 if(userInfo != null) {
 %>
 	<div class="row justify-content-center">
