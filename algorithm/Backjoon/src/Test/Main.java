@@ -3,55 +3,80 @@ package Test;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
+	
+	static int[] arr;
+	static int[] sort_arr;
+	static int[] answer_arr;
+	static boolean[] visited_idx;
+	static boolean[] visited_num;
+	static int[] index_arr;
+	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
 		StringBuffer sb = new StringBuffer();
-		int N = Integer.parseInt(st.nextToken());
-		int M = Integer.parseInt(st.nextToken());
-		int[] basket = new int[N+1];
-		for(int m = 0; m < M; m++) {
-			st = new StringTokenizer(br.readLine());
-			int i = Integer.parseInt(st.nextToken());
-			int j = Integer.parseInt(st.nextToken());
-			int k = Integer.parseInt(st.nextToken());
-			for(int n = i; n <= j; n++) {
-				basket[n] = k;
+		
+		int n = Integer.parseInt(br.readLine());
+		arr = new int[n];
+		sort_arr = new int[n];
+		answer_arr = new int[n];
+		visited_idx = new boolean[n];
+		int max = Integer.MIN_VALUE;
+		for(int i = 0; i < n; i++) {
+			arr[i] = Integer.parseInt(br.readLine());
+			sort_arr[i] = arr[i];
+			if (max < arr[i]) max = arr[i];
+		}
+		visited_num = new boolean[max+1];
+		index_arr = new int[max+1];
+		Arrays.sort(sort_arr);
+		for(int i = 0; i < n; i++) {
+			if (visited_num[sort_arr[i]]) {
+				continue;
+			}
+			visited_num[sort_arr[i]] = true;
+			int lower_bound = Arrays.binarySearch(sort_arr, sort_arr[i]);
+			int upper_bound = Arrays.binarySearch(sort_arr, sort_arr[i]+1);
+			if(upper_bound < 0) {
+				upper_bound = -upper_bound - 1;
+			}
+			if(upper_bound >= sort_arr.length) {
+				index_arr[sort_arr[i]] = 0;
+				continue;
+			}
+			if(upper_bound - lower_bound == 1) {
+				index_arr[sort_arr[i]] = upper_bound;
+				continue;
+			}
+			int mid = (upper_bound + lower_bound) / 2;
+			while(true) {
+				if(sort_arr[mid] == sort_arr[i]) {
+					lower_bound = mid;
+				} else if (sort_arr[mid] > sort_arr[i]) {
+					upper_bound = mid;
+				}
+				mid = (upper_bound + lower_bound) / 2;
+				if(upper_bound - lower_bound == 1) {
+					index_arr[sort_arr[i]] = upper_bound;
+					break;
+				}
 			}
 		}
-		for(int i = 1; i <= N; i++) {
-			sb.append(basket[i]).append(" ");
+		int cnt = 0;
+		for(int i = 0; i < n; i++) {
+			if(index_arr[arr[i]] == n) index_arr[arr[i]] = 0;
+			while(visited_idx[index_arr[arr[i]]]) {
+				index_arr[arr[i]]++;
+				if(index_arr[arr[i]] == n) index_arr[arr[i]] = 0;
+			}
+			visited_idx[index_arr[arr[i]]] = true;
+			answer_arr[i] = sort_arr[index_arr[arr[i]]++];
+			if(answer_arr[i] > arr[i]) cnt++;
 		}
-		System.out.println(sb.toString());
+		System.out.println(cnt);
+		
 	}
 }
-
-//2
-//6 7
-//#######
-//##.##.#
-//#...#O#
-//#R....#
-//#B....#
-//#######
-
-//3
-//6 7
-//#######
-//##.##.#
-//#B..#O#
-//#R....#
-//#.....#
-//#######
-
-//4
-//6 7
-//#######
-//##.##.#
-//#..B#O#
-//#....R#
-//#.....#
-//#######
