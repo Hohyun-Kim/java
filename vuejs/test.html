@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h2>{{ message }}</h2>
+        <input type="text" v-model="message" />
+    </div>
+    <script>
+        const { createApp } = Vue;
+        const app = createApp({
+            data() {
+                return {
+                    message: "Vuejs입니다.",
+                };
+            },
+        });
+
+        app.mount("#app");
+    </script>
+</body>
+
+</html>
