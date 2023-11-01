@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Property Shorthand</title>
+    <script>
+      // Propery Shorthand (단축 속성명)
+      // 객체를 정의 할 때 객체의 key값과 value값이 같을경우, 각각 표기하지 않고 한번만 표기.
+
+      // ES6 이전
+      // const id = "ssafy",
+      //   name = "안효인",
+      //   age = 30;
+
+      // const user = {
+      //   id: id,
+      //   name: name,
+      //   age: age,
+      // };
+      // console.log(user);
+
+      // ES6 이후
+      const id = "ssafy",
+        name = "안효인",
+        age = 30;
+
+      const user = {
+        id,
+        name,
+        age,
+      };
+      console.log(user);
+    </script>
+  </head>
+  <body></body>
+</html>

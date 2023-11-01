@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Composition API (setup())</h1>
+        {{message}} <br>
+        {{message.split(" ").reverse().join('')}}
+    </div>
+    <script>
+        const { createApp, ref } = Vue;
+
+        // let model = { message: "Hello Vue Js !!!!" };
+
+        let app = createApp({
+            setup() {
+                const message = ref("Hello Vue Js !!!!");
+                console.log(message);
+                console.log(message.value);
+
+                function increament() {
+
+                }
+
+                return {
+                    message,
+                    increament
+                }
+            }
+        });
+        app.mount('#app')
+    </script>
+
+</body>
+
+</html>
