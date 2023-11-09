@@ -1,0 +1,134 @@
+<!-- watcher.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 1 -->
+    <button @click="count++">Add 1</button>
+    <p>Count: {{ count }}</p>
+    <p>MSG: {{ msg }}</p>
+
+    <!-- 2 -->
+    <input v-model="message">
+    <p>Message length: {{ messageLength }}</p>
+
+    <label for="name">이름 : </label>
+    <input type="text" id="name" v-model.lazy="ssafy.name"> <br>
+    <label for="score">점수 : </label>
+    <input type="number" id="score" v-model.number="ssafy.score"> <br>
+    <div>msg2: {{msg2}}</div>
+    <div>msg3: {{msg3}}</div>
+
+    <label for="userid">아이디 : </label>
+    <input type="text" id="userid" v-model="user.userid"> <br>
+    <label for="userpwd">비밀번호 : </label>
+    <input type="text" id="userpwd" v-model="user.userpwd"> <br>
+    <button @click="regist">등록</button>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref, watch } = Vue
+
+    const app = createApp({
+      setup() {
+        const count = ref(0)
+        const msg = ref("")
+        const message = ref('')
+        const messageLength = ref(0)
+
+        const countWatch = watch(count, (newValue, oldValue) => {
+          console.log(`newValue: ${newValue}, oldValue: ${oldValue}`)
+          msg.value = newValue + "입니다."
+        })
+
+        const messageWatch = watch(message, (newValue, oldValue) => {
+          messageLength.value = newValue.length
+        })
+
+
+        const ssafy = ref({
+          name: "",
+          score: 0
+        })
+
+        const msg2 = ref("")
+
+        watch(ssafy.value, (newValue, oldValue) => {
+          console.log("싸피 감시 !!!")
+          msg2.value = `${newValue.name}님 점수 : ${newValue.score}`
+        })
+
+        const msg3 = ref("")
+
+        watch(() => ssafy.value.score, (newValue, oldValue) => {
+          console.log("싸피의 점수 감시 !!!")
+          msg3.value = `${ssafy.value.name}님 점수 : ${newValue}`
+        })
+
+        const user = ref({
+          userid: "",
+          userpwd: ""
+        })
+
+        const idErr = ref("")
+        const pwdErr = ref("")
+
+        watch(() => user.value.userid,
+          (val) => {
+            if (val.length == 0) {
+              idErr.value = "아이디를 반드시 입력!!!"
+            } else {
+              idErr.value = ""
+            }
+          }, { immediate: true })
+
+        watch(() => user.value.userpwd,
+          (val) => {
+            if (val.length == 0) {
+              pwdErr.value = "비밀번호를 반드시 입력!!!"
+            } else {
+              pwdErr.value = ""
+            }
+          }, { immediate: true })
+
+        function regist() {
+          if (idErr.value) {
+            alert(idErr.value)
+            return
+          } else if (pwdErr.value) {
+            alert(pwdErr.value)
+            return
+          } else {
+            alert("회원 등록하러 간다!!")
+          }
+        }
+
+        return {
+          count,
+          msg,
+          message,
+          messageLength,
+          ssafy,
+          msg2,
+          msg3,
+          user,
+          regist
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vue instance option</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    table {
+      width: 500px;
+    }
+
+    tr,
+    td {
+      text-align: center;
+    }
+
+    th {
+      border-bottom: 2px solid darkgray;
+    }
+
+    img {
+      width: 80px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <h2>SSAFY 캠퍼스 날씨</h2>
+    <label for="area">캠퍼스 선택 : </label>
+    <select id="area" v-model="selArea">
+      <option value="" disabled>=== 선택 ===</option>
+      <option v-for="(ssafy, index) in ssafys" :key="ssafy.code" :value="ssafy.code">
+        {{ ssafy.area }}
+      </option>
+    </select>
+    선택 캠퍼스 코드 : <input type="text" v-model="selArea" /><br /><br />
+    <div v-if="weathers.length != 0">
+      <table>
+        <tr>
+          <th>시간(시)</th>
+          <th>아이콘</th>
+          <th>온도(°C)</th>
+          <th>날씨</th>
+          <th>습도(%)</th>
+        </tr>
+        <tr v-for="(weather, index) in weathers" :key="index">
+          <td>{{ weather.hour }}</td>
+          <td><img :src="`./img/${weather.icon}.png`" alt="" /></td>
+          <td>{{ weather.temp }}</td>
+          <td>{{ weather.wfKor }}</td>
+          <td>{{ weather.reh }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    const { createApp, ref, watch } = Vue;
+
+    createApp({
+      setup() {
+        const ssafys = ref([
+          { area: "서울", code: "1168064000" },
+          { area: "광주", code: "2915573000" },
+          { area: "구미", code: "4719060000" },
+          { area: "대전", code: "3020052600" },
+          { area: "부울경", code: "2635061000" },
+        ]);
+        const selArea = ref("");
+        const weathers = ref([]);
+
+        // code 변경 시 watch를 사용하여 비동기로 날씨 얻기.
+
+        const getWeather = (val) => {
+          fetch(`http://www.kma.go.kr/wid/queryDFSRSS.jsp?zone=${val}`)
+            .then((response) => response.text())
+            .then((data) => makeList(data));
+        };
+
+        const makeList = (data) => {
+          weathers.value = [];
+          let parser = new DOMParser();
+          const xml = parser.parseFromString(data, "application/xml");
+          let datas = xml.querySelectorAll("data");
+          datas.forEach((weather) => {
+            let obj = new Object();
+            obj.hour = weather.querySelector("hour").textContent;
+            obj.icon = weather.querySelector("wfEn").textContent;
+            obj.temp = weather.querySelector("temp").textContent;
+            obj.wfKor = weather.querySelector("wfKor").textContent;
+            obj.reh = weather.querySelector("reh").textContent;
+            weathers.value.push(obj);
+          });
+        };
+
+        const watchWeather = watch(selArea, (new_value, old_value) => {
+          getWeather(new_value)
+        })
+
+        return {
+          ssafys,
+          selArea,
+          weathers,
+        };
+      },
+    }).mount("#app");
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!-- computed.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+    <h2>남은 할 일</h2>
+    <p>c : {{ restOfTodos }}</p>
+    <p>c : {{ restOfTodos }}</p>
+    <p>m : {{ getRestOfTodos() }}</p>
+    <p>m : {{ getRestOfTodos() }}</p>
+
+    <h2>오늘 할일 ({{hasOpenTodos}}개 남았음)</h2>
+    <ul v-if="needTodos != 0">
+      <template v-for="todo in todos" :key="todo.id">
+        <li v-if="!todo.isComplete">
+          {{ todo.text }}
+        </li>
+      </template>
+    </ul>
+    <div v-else>All Complete!!!!</div>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script>
+    const { createApp, ref, computed } = Vue
+
+    const app = createApp({
+      setup() {
+        let id = 0;
+        const todos = ref([
+          { id: ++id, text: 'Vue 실습', isComplete: false },
+          { id: ++id, text: '자격증 공부', isComplete: false },
+          { id: ++id, text: 'TIL 작성', isComplete: false },
+          { id: ++id, text: '출석체크', isComplete: false },
+          { id: ++id, text: '1일 1알고', isComplete: false }
+        ])
+
+        const restOfTodos = computed(() => {
+          console.log("method restOfTodos called")
+          return todos.value.length > 0 ? '아직 남았다' : '퇴근!'
+        })
+
+        const getRestOfTodos = function () {
+          console.log("method getRestOfTodos called")
+          return todos.value.length > 0 ? '아직 남았다' : '퇴근!'
+        }
+
+        const needTodos = computed(() => todos.value.filter(todo => !todo.isComplete))
+        const hasOpenTodos = computed(() => needTodos.value.length)
+
+        const a = ref(0)
+        const abc = computed(() => {
+          return a.value + 1
+        })
+
+        console.log(abc.value++)
+
+
+        return {
+          todos,
+          restOfTodos,
+          getRestOfTodos,
+          needTodos,
+          hasOpenTodos,
+          a,
+          abc,
+        }
+      }
+    })
+
+    app.mount('#app')
+  </script>
+</body>
+
+</html>
