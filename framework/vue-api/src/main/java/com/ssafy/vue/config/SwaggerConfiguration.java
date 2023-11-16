@@ -1,102 +1,151 @@
 package com.ssafy.vue.config;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
+import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.builders.ResponseMessageBuilder;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
-import springfox.documentation.service.ResponseMessage;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger.web.UiConfiguration;
-import springfox.documentation.swagger.web.UiConfigurationBuilder;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
-@Configuration // 스프링 실행시 설정파일
-@EnableSwagger2 // Swagger2를 사용
-@SuppressWarnings("unchecked") // warning 제거
+@Configuration
 public class SwaggerConfiguration {
 
-//	Swagger-UI 2.x 확인
-//	http://localhost[:port]/{your-app-root}/swagger-ui.html
-//	http://localhost/vue/swagger-ui.html
-	
 //	Swagger-UI 3.x 확인
-//	http://localhost[:port]/{your-app-root}/swagger-ui/index.html
+//	//http://localhost/vue/swagger-ui/index.html
+	
+	private final ServerProperties serverProperties;
 
-	private String version = "V1";
-	private String title = "SSAFY Vuejs API " + version;
-
-	private ApiInfo apiInfo() {
-		String descript = "<img src=\"http://localhost/vue/static/assets/img/ssafy_logo.png\"><br>";
-		descript += "<h2>싸피 Vuejs 개발을 위한 API 문서입니다.</h2>";
-		descript += "회원정보, 게시판, 아파트 정보를 테스트 할 수 있습니다.";
-		return new ApiInfoBuilder().title(title).description(descript)
-//				.termsOfServiceUrl("https://edu.ssafy.com")
-				.contact(new Contact("SSAFY", "https://edu.ssafy.com", "ssafy@ssafy.com")).license("SSAFY License")
-				.licenseUrl("ssafy@ssafy.com").version("1.0").build();
-	}
-
-	// swagger ui 설정.
-	@Bean
-	public UiConfiguration uiConfig() {
-		return UiConfigurationBuilder.builder().displayRequestDuration(true).validatorUrl("").build();
+    public SwaggerConfiguration(ServerProperties serverProperties) {
+		super();
+		this.serverProperties = serverProperties;
 	}
 	
-	@Bean
-	public Docket allApi() {
-		return getDocket("all", Predicates.or(PathSelectors.regex("/*.*")));
-	}
+    @Bean
+    public Docket allApi() {
+        return new Docket(DocumentationType.OAS_30)
+        	.consumes(getConsumeContentTypes())
+        	.produces(getProduceContentTypes())
+            .groupName("ALL-API")
+            .apiInfo(allApiInfo())
+            .select()
+            .apis(RequestHandlerSelectors.basePackage("com.ssafy.vue"))
+            .paths(PathSelectors.ant("/**"))
+            .build()
+            .useDefaultResponseMessages(false);
+    }
+    
+    @Bean
+    public Docket userApi() {
+        return new Docket(DocumentationType.OAS_30)
+        	.consumes(getConsumeContentTypes())
+            .produces(getProduceContentTypes())
+            .groupName("USER-API")
+            .apiInfo(userApiInfo())
+            .select()
+            .apis(RequestHandlerSelectors.basePackage("com.ssafy.vue.member.controller"))
+            .paths(PathSelectors.ant("/vue/user/**"))
+            .build()
+            .useDefaultResponseMessages(false);
+    }
+    
+    @Bean
+    public Docket boardApi() {
+        return new Docket(DocumentationType.OAS_30)
+        	.consumes(getConsumeContentTypes())
+            .produces(getProduceContentTypes())
+            .groupName("BOARD-API")
+            .apiInfo(boardApiInfo())
+            .select()
+            .apis(RequestHandlerSelectors.basePackage("com.ssafy.vue.board.controller"))
+            .paths(PathSelectors.ant("/vue/board/**"))
+            .build()
+            .useDefaultResponseMessages(false);
+    }
+    
+    @Bean
+    public Docket mapApi() {
+        return new Docket(DocumentationType.OAS_30)
+        	.consumes(getConsumeContentTypes())
+            .produces(getProduceContentTypes())
+            .groupName("MAP-API")
+            .apiInfo(mapApiInfo())
+            .select()
+            .apis(RequestHandlerSelectors.basePackage("com.ssafy.vue.map.controller"))
+            .paths(PathSelectors.ant("/vue/map/**"))
+            .build()
+            .useDefaultResponseMessages(false);
+    }
+    
+    private ApiInfo allApiInfo() {
+        Integer port = serverProperties.getPort();
+        return new ApiInfoBuilder()
+            .title("SSAFY Swagger Open API Docs")
+            .description(
+                "<h3>SSAFY API Reference for Developers</h3>Vuejs를 위한 API<br><img src=\"/assets/img/ssafy_logo.png\" width=\"150\">")
+            .version("1.0")
+            .license("SSAFY License")
+            .licenseUrl("https://www.ssafy.com/ksp/jsp/swp/etc/swpPrivacy.jsp")
+            .termsOfServiceUrl("http://edu.ssafy.com")
+            .contact(new Contact("SSAFY", "https://www.ssafy.com", "ssafy@ssafy.com"))
+            .build();
+    }
 
-	@Bean
-	public Docket userApi() {
-		return getDocket("users", Predicates.or(PathSelectors.regex("/user.*")));
-//		return getDocket("회원", PathSelectors.ant("/user/*"));
-	}
+    private ApiInfo userApiInfo() {
+        return new ApiInfoBuilder()
+            .title("사용자")
+            .description("<h2>사용자 API</h2>")
+            .version("1.0")
+            .license("SSAFY License")
+            .licenseUrl("https://www.ssafy.com/ksp/jsp/swp/etc/swpPrivacy.jsp")
+            .termsOfServiceUrl("http://edu.ssafy.com")
+            .contact(new Contact("SSAFY", "https://www.ssafy.com", "ssafy@ssafy.com"))
+            .build();
+    }
+    
+    private ApiInfo boardApiInfo() {
+        return new ApiInfoBuilder()
+            .title("게시판")
+            .description("<h2>게시판 API</h2>")
+            .version("1.0")
+            .license("SSAFY License")
+            .licenseUrl("https://www.ssafy.com/ksp/jsp/swp/etc/swpPrivacy.jsp")
+            .termsOfServiceUrl("http://edu.ssafy.com")
+            .contact(new Contact("SSAFY", "https://www.ssafy.com", "ssafy@ssafy.com"))
+            .build();
+    }
+    
+    private ApiInfo mapApiInfo() {
+        return new ApiInfoBuilder()
+            .title("Map")
+            .description("<h2>Map API</h2>시도 구군코드를 얻을 수 있다.")
+            .version("1.0")
+            .license("SSAFY License")
+            .licenseUrl("https://www.ssafy.com/ksp/jsp/swp/etc/swpPrivacy.jsp")
+            .termsOfServiceUrl("http://edu.ssafy.com")
+            .contact(new Contact("SSAFY", "https://www.ssafy.com", "ssafy@ssafy.com"))
+            .build();
+    }
 
-	@Bean
-	public Docket searchApi() {
-		return getDocket("boards", Predicates.or(PathSelectors.regex("/board.*")));
-	}
+	private Set<String> getConsumeContentTypes() {
+        Set<String> consumes = new HashSet<>();
+        consumes.add("application/json;charset=UTF-8");
+//      consumes.add("application/xml;charset=UTF-8");
+        consumes.add("application/x-www-form-urlencoded");
+        return consumes;
+    }
 
-	@Bean
-	public Docket commonApi() {
-		return getDocket("apts", Predicates.or(PathSelectors.regex("/map.*")));
-
-	}
-
-	public Docket getDocket(String groupName, Predicate<String> predicate) {
-		return new Docket(DocumentationType.SWAGGER_2).groupName(groupName).apiInfo(apiInfo()).select()
-				.apis(RequestHandlerSelectors.basePackage("com.ssafy.vue")).paths(predicate)
-				.apis(RequestHandlerSelectors.any()).build()
-				.globalResponseMessage(RequestMethod.GET, getCustomizedResponseMessages())
-				.globalResponseMessage(RequestMethod.POST, getCustomizedResponseMessages())
-				.globalResponseMessage(RequestMethod.DELETE, getCustomizedResponseMessages())
-				.globalResponseMessage(RequestMethod.PUT, getCustomizedResponseMessages())
-				.globalResponseMessage(RequestMethod.PATCH, getCustomizedResponseMessages());
-	}
-
-	private List<ResponseMessage> getCustomizedResponseMessages() {
-		List<ResponseMessage> responseMessages = new ArrayList<>();
-		responseMessages.add(new ResponseMessageBuilder().code(200).message("성공").build());
-//		responseMessages.add(new ResponseMessageBuilder().code(204).message("데이터 미존재").build());
-		responseMessages.add(new ResponseMessageBuilder().code(400).message("입력값 오류").build());
-		responseMessages.add(new ResponseMessageBuilder().code(401).message("로그인필요!!!").build());
-		responseMessages.add(new ResponseMessageBuilder().code(403).message("권한없음").build());
-//		responseMessages.add(new ResponseMessageBuilder().code(412).message("처리중 오류").build());
-		responseMessages.add(new ResponseMessageBuilder().code(500).message("서버에러").build());
-		return responseMessages;
-	}
+    private Set<String> getProduceContentTypes() {
+        Set<String> produces = new HashSet<>();
+        produces.add("application/json;charset=UTF-8");
+        return produces;
+    }
 
 }
